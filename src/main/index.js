@@ -49,8 +49,6 @@ app.on('activate', () => {
 
 ipcMain.on('min', () => {
   mainWindow.minimize()
-  mainWindow.setSkipTaskbar(true)
-  mainWindow.hide()
 })
 ipcMain.on('max', () => {
   if (mainWindow.isMaximized()) {
