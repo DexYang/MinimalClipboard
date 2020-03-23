@@ -25,17 +25,21 @@
         @click.stop.prevent="unTop()" />
     </div>
     <div class="content">
-      <div
-        v-for="(item, index) in tableData"
-        :key="index"
-        class="item"
-        @click.stop.prevent="copy(tableData[tableData.length - index - 1].text)"
-        @contextmenu.prevent="deleteItem(tableData[tableData.length - index - 1])">
-        <el-link
-          :underline="false">
-          {{ index + 1 }}. {{ tableData[tableData.length - index - 1].text }}
-        </el-link>
-      </div>
+      <el-scrollbar
+        wrap-class="scrollbar"
+        style="height: 100%;">
+        <div
+          v-for="(item, index) in tableData"
+          :key="index"
+          class="item"
+          @click.stop.prevent="copy(tableData[tableData.length - index - 1].text)"
+          @contextmenu.prevent="deleteItem(tableData[tableData.length - index - 1])">
+          <el-link
+            :underline="false">
+            {{ index + 1 }}. {{ tableData[tableData.length - index - 1].text }}
+          </el-link>
+        </div>
+      </el-scrollbar>
     </div>
     <div class="footer">
       <!--      <el-link-->
@@ -114,6 +118,20 @@ export default {
     white-space: nowrap;
   }
 
+  .scrollbar {
+    overflow-x: auto;
+    overflow-y: auto;
+    padding-left: 16px;
+  }
+
+  .el-scrollbar__bar.is-vertical {
+    color: #dedede !important;
+  }
+
+  .el-scrollbar__thumb {
+    background: #dedede !important;
+  }
+
   .el-link--default {
     color: black !important;
   }
@@ -155,7 +173,7 @@ export default {
   .content {
     width: calc(100vw);
     height: calc(100vh - 60px);
-    padding: 0 16px 0 16px;
+    padding-right: 5px;
     overflow:hidden;
   }
 
